@@ -28,9 +28,6 @@ export default function App() {
                 }}
                 theme={getColoredAxis(line1Color)}
                 margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
-
-                useMesh={true}
-
             />
           </div>
 
@@ -50,7 +47,7 @@ const SecondGraph = () => {
   return (
       <ResponsiveLine
         data={data1And2}
-        colors={["rgba(255, 255, 255, 0)", "red"]}
+        colors={["rgba(255, 255, 255, 0)", "red"]} /* Make the first line transparent with 0 opacity */
         margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
         axisRight={{
           legend: "Wins / Loss",
@@ -63,6 +60,7 @@ const SecondGraph = () => {
         axisBottom={null}
         theme={getColoredAxis("red")}
 
+        /* Add this for tooltip */
         useMesh={true}
         enableSlices="x"
         sliceTooltip={({ slice }) => {
