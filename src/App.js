@@ -77,7 +77,7 @@ const SecondGraph = () => {
                     <div
                         key={point.id}
                         style={{
-                          color: point.serieColor == "rgba(255, 255, 255, 0)" ? line1Color : point.serieColor,
+                          color: point.serieColor === "rgba(255, 255, 255, 0)" ? line1Color : point.serieColor,
                           padding: '3px 0',
                         }}
                     >
