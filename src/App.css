@@ -1,5 +1,26 @@
 .App {
+  font-family: sans-serif;
   text-align: center;
+}
+
+.wrapper {
+  height: 300px;
+  position: relative;
+}
+.graphContainer {
+  height: 300px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 5;
+}
+
+.secondGraph {
+  height: 300px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 4;
 }
 
 .App-logo {
