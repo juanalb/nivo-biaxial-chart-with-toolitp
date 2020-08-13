@@ -13,26 +13,29 @@ export default function App() {
           different scales the first graph would have its y-axis displayed on the
           left and the second would have its y-axis displayed on the right
         </p>
-        <div className="wrapper">
-          <div className="graphContainer">
-            <ResponsiveLine
-                data={data}
-                colors={["red"]}
-                layers={["grid", "axes", "lines", "markers", "legends"]}
-                axisLeft={{
-                  legend: "Points Scored",
-                  legendPosition: "middle",
-                  legendOffset: -40
-                }}
-                theme={getColoredAxis("blue")}
-                margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
-            />
-          </div>
+        {/*<div className="wrapper">*/}
+        {/*  <div className="graphContainer">*/}
+        {/*    <ResponsiveLine*/}
+        {/*        data={data}*/}
+        {/*        colors={["red"]}*/}
+        {/*        layers={["grid", "axes", "lines", "markers", "legends"]}*/}
+        {/*        axisLeft={{*/}
+        {/*          legend: "Points Scored",*/}
+        {/*          legendPosition: "middle",*/}
+        {/*          legendOffset: -40*/}
+        {/*        }}*/}
+        {/*        theme={getColoredAxis("blue")}*/}
+        {/*        margin={{ top: 50, right: 50, bottom: 50, left: 50 }}*/}
+
+        {/*        useMesh={true}*/}
+
+        {/*    />*/}
+        {/*  </div>*/}
 
           <div className="secondGraph">
             <SecondGraph />
           </div>
-        </div>
+        {/*</div>*/}
       </div>
   );
 }
@@ -42,19 +45,21 @@ const SecondGraph = () => {
   const data = testData2
   return (
       <ResponsiveLine
-          data={data}
-          colors={["blue"]}
-          margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
-          axisRight={{
-            legend: "Wins / Loss",
-            legendPosition: "middle",
-            legendOffset: 40
-          }}
-          axisLeft={null}
-          axisTop={null}
-          enableGridY={false}
-          axisBottom={null}
-          theme={getColoredAxis("red")}
+        data={data}
+        colors={["blue"]}
+        margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+        axisRight={{
+          legend: "Wins / Loss",
+          legendPosition: "middle",
+          legendOffset: 40
+        }}
+        axisLeft={null}
+        axisTop={null}
+        enableGridY={false}
+        axisBottom={null}
+        theme={getColoredAxis("red")}
+
+        useMesh={true}
       />
   );
 };
