@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
-import { testData, testData2 } from './data.js';
+import { data, data2 } from './data.js';
 import { ResponsiveLine } from "@nivo/line";
 
+const line1Color = "blue";
+
 export default function App() {
-  const data = testData
+  console.log("Graph1 Data: ", data);
   return (
       <div className="App">
         <h1>Two Y-Axis Line Chart</h1>
@@ -13,40 +15,42 @@ export default function App() {
           different scales the first graph would have its y-axis displayed on the
           left and the second would have its y-axis displayed on the right
         </p>
-        {/*<div className="wrapper">*/}
-        {/*  <div className="graphContainer">*/}
-        {/*    <ResponsiveLine*/}
-        {/*        data={data}*/}
-        {/*        colors={["red"]}*/}
-        {/*        layers={["grid", "axes", "lines", "markers", "legends"]}*/}
-        {/*        axisLeft={{*/}
-        {/*          legend: "Points Scored",*/}
-        {/*          legendPosition: "middle",*/}
-        {/*          legendOffset: -40*/}
-        {/*        }}*/}
-        {/*        theme={getColoredAxis("blue")}*/}
-        {/*        margin={{ top: 50, right: 50, bottom: 50, left: 50 }}*/}
+        <div className="wrapper">
+          <div className="graphContainer">
+            <ResponsiveLine
+                data={data}
+                colors={[line1Color]}
+                layers={["grid", "axes", "lines", "markers", "legends"]}
+                axisLeft={{
+                  legend: "Points Scored",
+                  legendPosition: "middle",
+                  legendOffset: -40
+                }}
+                theme={getColoredAxis(line1Color)}
+                margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
 
-        {/*        useMesh={true}*/}
+                useMesh={true}
 
-        {/*    />*/}
-        {/*  </div>*/}
+            />
+          </div>
 
           <div className="secondGraph">
             <SecondGraph />
           </div>
-        {/*</div>*/}
+        </div>
       </div>
   );
 }
 
 // I want this to be on top of the other graph
 const SecondGraph = () => {
-  const data = testData2
+  const data1And2 = data.concat(data2);
+  console.log("Graph2 Data: ", data1And2);
+
   return (
       <ResponsiveLine
-        data={data}
-        colors={["blue"]}
+        data={data1And2}
+        colors={["rgba(255, 255, 255, 0)", "red"]}
         margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
         axisRight={{
           legend: "Wins / Loss",
@@ -60,6 +64,31 @@ const SecondGraph = () => {
         theme={getColoredAxis("red")}
 
         useMesh={true}
+        enableSlices="x"
+        sliceTooltip={({ slice }) => {
+          return (
+              <div
+                  style={{
+                    background: 'white',
+                    padding: '9px 12px',
+                    border: '1px solid #ccc',
+                  }}
+              >
+                <div>x: {slice.points[0].data.x}</div>
+                {slice.points.map(point => (
+                    <div
+                        key={point.id}
+                        style={{
+                          color: point.serieColor == "rgba(255, 255, 255, 0)" ? line1Color : point.serieColor,
+                          padding: '3px 0',
+                        }}
+                    >
+                      <strong>{point.serieId}</strong> [{point.data.yFormatted}]
+                    </div>
+                ))}
+              </div>
+          )
+        }}
       />
   );
 };
@@ -80,17 +109,4 @@ const getColoredAxis = color => {
       }
     }
   };
-};
-
-// generate some random data for charts
-const getTestData = (name, max = 1) => {
-  const data = {
-    id: name,
-    data: []
-  };
-  for (let x = 0; x < 10; x++) {
-    data.data[x] = { x, y: Math.random() * max };
-  }
-  console.log(data);
-  return [data];
 };

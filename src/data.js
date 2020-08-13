@@ -1,6 +1,6 @@
-export const testData = [
+export const data = [
     {
-        "id": "japan",
+        "id": "line1",
         "color": "hsl(43, 70%, 50%)",
         "data": [
             {
@@ -55,9 +55,9 @@ export const testData = [
     },
 ];
 
-export const testData2 = [
+export let data2 = [
     {
-        "id": "japan",
+        "id": "line2",
         "color": "hsl(43, 70%, 50%)",
         "data": [
             {
